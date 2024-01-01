@@ -17,7 +17,19 @@ model Post {
   content   String?
   published Boolean @default(false)
   author    User?   @relation(fields: [authorId], references: [id])
+  images    Image[]
   authorId  String?
+
+  @@map(name: "posts")
+}
+
+model Image {
+  id     String @id @default(uuid())
+  data   String
+  postId String
+  post   Post   @relation(fields: [postId], references: [id])
+
+  @@map(name: "images")
 }
 
 model User {
