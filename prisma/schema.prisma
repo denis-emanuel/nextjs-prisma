@@ -14,8 +14,9 @@ datasource db {
 model Post {
   id        String   @id @default(cuid())
   title     String
-  content   String?
-  published Boolean  @default(false)
+  content   Json?
+  sold      Boolean? @default(false)
+  price     Float
   author    User?    @relation(fields: [authorId], references: [id])
   authorId  String?
   images    Image[]

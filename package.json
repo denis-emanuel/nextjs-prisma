@@ -22,10 +22,13 @@
     "next-auth": "^4.24.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "react-swipeable-views": "^0.14.0",
+    "react-swipeable-views-utils": "^0.14.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/react-swipeable-views-utils": "^0.13.7",
     "autoprefixer": "^10.4.4",
     "eslint": "8.11.0",
     "eslint-config-next": "^14.0.4",
