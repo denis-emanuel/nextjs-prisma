@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 //TODO update
-const title = "Titlu";
-const description = "Descriere";
+const title = "AIS";
+const description = "Vanzare utilaje";
 
 export const metadata: Metadata = {
   title,
@@ -58,13 +58,15 @@ export default async function RootLayout({
                 className="font-bold text-white"
               >
                 <Link href="/">Prima pagina</Link>
-                <Link href="/about">Utilaje</Link>
+                <Link href="/utilaje">Utilaje</Link>
                 <Link href="/contact">Contact</Link>
               </Breadcrumbs>
             </Stack>
           </div>
 
-          {children}
+          <div className="flex h-screen w-screen bg-white text-black">
+            {children}
+          </div>
         </AppRouterCacheProvider>
       </body>
     </html>

@@ -12,20 +12,22 @@ datasource db {
 }
 
 model Post {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   title     String
   content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  images    Image[]
+  published Boolean  @default(false)
+  author    User?    @relation(fields: [authorId], references: [id])
   authorId  String?
+  images    Image[]
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
   @@map(name: "posts")
 }
 
 model Image {
   id     String @id @default(uuid())
-  data   String
+  url    String
   postId String
   post   Post   @relation(fields: [postId], references: [id])
 
