@@ -9,7 +9,7 @@ module.exports = {
       colors: {
         black: {
           DEFAULT: "#333333", // A slightly less black shade
-          light: "#666666", // An even lighter shade if needed
+          lightYl: "#ede5ce", // An even lighter shade if needed
         },
         white: {
           DEFAULT: "#f8f8f8", // A slightly dark-ish white

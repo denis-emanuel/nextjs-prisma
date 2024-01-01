@@ -2,10 +2,11 @@
 import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Toaster } from "react-hot-toast";
-import AuthStatus from "@/components/auth-status";
-import { Suspense } from "react";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import Stack from "@mui/material/Stack";
+import Link from "next/link";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,11 +36,24 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <Toaster />
-        <Suspense fallback="Loading...">
-          <AuthStatus />
-        </Suspense>
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <div className="flex justify-between py-3 px-10 bg-black font-bold text-white">
+            <div className="italic font-serif">
+              <Link href="/">All Inclusive Special</Link>
+            </div>
+            <Stack spacing={2}>
+              <Breadcrumbs
+                separator={<NavigateNextIcon fontSize="small" />}
+                aria-label="breadcrumb"
+                className="font-bold text-white"
+              >
+                <Link href="/">Principal</Link>
+                <Link href="/about">Utilaje</Link>
+                <Link href="/contact">Contact</Link>
+              </Breadcrumbs>
+            </Stack>
+          </div>
+
           {children}
         </AppRouterCacheProvider>
       </body>
