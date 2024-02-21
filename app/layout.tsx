@@ -64,9 +64,7 @@ export default async function RootLayout({
             </Stack>
           </div>
 
-          <div className="flex h-screen w-screen bg-white text-black">
-            {children}
-          </div>
+          <div className="bg-white text-black">{children}</div>
         </AppRouterCacheProvider>
       </body>
     </html>
