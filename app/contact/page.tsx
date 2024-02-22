@@ -1,7 +1,11 @@
+import ContactForm from "@/components/contact/form";
+import ContactInfo from "@/components/contact/info";
+
 export default function Contact() {
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <div className="flex space-x-3">contact</div>
+    <div className="container pt-5 px-2 lg:px-15 lg:flex lg:flex-row lg:justify-around">
+      <ContactInfo />
+      <ContactForm />
     </div>
   );
 }
