@@ -35,7 +35,7 @@ export default async function Utilaje() {
                   style={{ paddingTop: "100%" }}
                 >
                   <Image
-                    src={post.images[0].url}
+                    src={post?.images[0]?.url ?? "/no-image.jpg"}
                     alt={post.title}
                     layout="fill"
                     objectFit="cover"

@@ -20,7 +20,9 @@ async function getData(id: string) {
 
 export default async function Utilaj({ params }: UtilajProps) {
   const data = await getData(params.id);
-  const imageUrls = data?.images.map((image) => image.url);
+  const imageUrls = data?.images
+    .filter((image) => image.url !== null)
+    .map((image) => image.url);
 
   return (
     <div className="w-screen h-screen mx-auto pt-2 px-2 md:px-10 lg:px-20">
