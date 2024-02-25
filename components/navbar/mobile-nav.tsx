@@ -40,7 +40,7 @@ export default function MobileNav() {
       >
         <ul className="flex flex-col items-center border divide-y divide-white">
           {NavbarItems.map((item, index) => (
-            <li key={index} className="py-1 w-full px-5">
+            <li key={index} className="py-2 w-full px-3">
               <NavLink href={item.href} name={item.name} />
             </li>
           ))}
