@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import DensityMediumSharpIcon from "@mui/icons-material/DensityMediumSharp";
 import NavLink from "./nav-link";
-import { NavbarItems } from "types/enum/navbar";
+import { NavbarItems } from "types/constants/navbar";
 
 export default function MobileNav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

@@ -1,7 +1,7 @@
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavLink from "./nav-link";
-import { NavbarItems } from "types/enum/navbar";
+import { NavbarItems } from "types/constants/navbar";
 
 export default function DesktopNav() {
   return (

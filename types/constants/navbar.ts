@@ -1,6 +1,6 @@
 export const NavbarItems = [
   {
-    name: "Prima pagina",
+    name: "Acasa",
     href: "/",
   },
   {
