@@ -1,8 +1,9 @@
-import Carousel from "@/components/carousel";
-import prisma from "@/lib/prisma";
-import { Paper } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import prisma from "@/lib/prisma";
+
+import { Paper } from "@mui/material";
+
 import formatPrice from "utils/format-price";
 
 async function getData() {

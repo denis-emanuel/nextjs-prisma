@@ -36,11 +36,11 @@ export default function MobileNav() {
       <div
         className={`${
           isMobileMenuOpen ? "block" : "hidden"
-        } lg:hidden z-10 absolute top-14 right-0  bg-black `}
+        } lg:hidden z-10 absolute top-14 right-0`}
       >
         <ul className="flex flex-col items-center border divide-y divide-white">
           {NavbarItems.map((item, index) => (
-            <li key={index} className="py-2 w-full px-3">
+            <li key={index} className="py-2 w-full px-3 bg-black">
               <NavLink href={item.href} name={item.name} />
             </li>
           ))}
