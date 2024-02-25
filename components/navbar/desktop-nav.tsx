@@ -1,6 +1,7 @@
-import Link from "next/link";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import NavLink from "./nav-link";
+import { NavbarItems } from "types/enum/navbar";
 
 export default function DesktopNav() {
   return (
@@ -11,9 +12,9 @@ export default function DesktopNav() {
           aria-label="breadcrumb"
           className="font-bold text-white"
         >
-          <Link href="/">Prima pagina</Link>
-          <Link href="/utilaje">Utilaje</Link>
-          <Link href="/contact">Contact</Link>
+          {NavbarItems.map((item, index) => (
+            <NavLink key={index} href={item.href} name={item.name} />
+          ))}
         </Breadcrumbs>
       </ul>
     </>

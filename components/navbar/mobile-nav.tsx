@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import DensityMediumSharpIcon from "@mui/icons-material/DensityMediumSharp";
+import NavLink from "./nav-link";
+import { NavbarItems } from "types/enum/navbar";
 
 export default function MobileNav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,6 +28,7 @@ export default function MobileNav() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [mobileMenuRef]);
+
   return (
     <div ref={mobileMenuRef} onClick={toggleMobileMenu}>
       <DensityMediumSharpIcon className="inline-block cursor-pointer lg:hidden" />
@@ -34,32 +36,14 @@ export default function MobileNav() {
       <div
         className={`${
           isMobileMenuOpen ? "block" : "hidden"
-        } lg:hidden z-10 absolute top-14 right-0 w-3/5 bg-black`}
+        } lg:hidden z-10 absolute top-14 right-0  bg-black `}
       >
-        <ul className="flex flex-col items-center space-y-4">
-          <li>
-            <Link href="/" className="text-white">
-              Prima pagina
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/utilaje"
-              className="text-white"
-              // onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Utilaje
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/contact"
-              className="text-white"
-              // onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Contact
-            </Link>
-          </li>
+        <ul className="flex flex-col items-center border divide-y divide-white">
+          {NavbarItems.map((item, index) => (
+            <li key={index} className="py-1 w-full px-5">
+              <NavLink href={item.href} name={item.name} />
+            </li>
+          ))}
         </ul>
       </div>
     </div>

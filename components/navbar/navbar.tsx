@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
 
 import DesktopNav from "./desktop-nav";
 import MobileNav from "./mobile-nav";
