@@ -39,6 +39,7 @@ export default async function Utilaje() {
                     alt={post.title}
                     layout="fill"
                     objectFit="cover"
+                    className="rounded-t-lg"
                   />
                 </div>
                 <div className="p-2 lg:p-5">
