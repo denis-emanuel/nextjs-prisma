@@ -1,6 +1,10 @@
 "use server";
 
-import { sendEmail } from "@/lib/nodemailer";
+import {
+  emailOptionsForAdmin,
+  emailOptionsForUser,
+  sendEmail,
+} from "@/lib/nodemailer";
 import { z } from "zod";
 
 export async function submitContact(prevState: any, formData: FormData) {
@@ -11,16 +15,27 @@ export async function submitContact(prevState: any, formData: FormData) {
     message: z.string(),
   });
 
+  const email = formData.get("email") as string;
+  const name = formData.get("name") as string;
+  const phone = formData.get("phone") as string;
+  const message = formData.get("message") as string;
+
   const data = schema.parse({
-    name: formData.get("name"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    message: formData.get("message"),
+    name: name,
+    email: email,
+    phone: phone,
+    message: message,
   });
 
   let res;
   try {
-    res = await sendEmail();
+    // send email to admin
+    const adminOptions = emailOptionsForAdmin(email, name, phone, message);
+    res = await sendEmail(adminOptions);
+
+    // send email to user
+    const userOptions = emailOptionsForUser(email, name);
+    res = await sendEmail(userOptions);
   } catch (error) {
     res = error;
   }
