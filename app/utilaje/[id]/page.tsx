@@ -1,10 +1,35 @@
 import { ImagesCarousel } from "@/components/carousel/index";
 import prisma from "@/lib/prisma";
 import { Paper } from "@mui/material";
+import { ResolvingMetadata } from "next";
 
 type UtilajProps = {
   params: { id: string };
 };
+
+export async function generateMetadata(
+  { params }: UtilajProps,
+  parent: ResolvingMetadata
+) {
+  const id = params.id;
+
+  const data = await getData(id);
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  const imageUrls =
+    data?.images
+      .filter((image) => image.url !== null)
+      .map((image) => image.url) ?? [];
+
+  return {
+    title: data?.title ?? "Utilaj",
+    openGraph: {
+      images: [...imageUrls, ...previousImages],
+    },
+  };
+}
 
 async function getData(id: string) {
   const data = await prisma.post.findUnique({

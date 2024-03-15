@@ -1,5 +1,13 @@
+import { Metadata } from "next";
+
 import ContactForm from "@/components/contact/form";
 import ContactInfo from "@/components/contact/info";
+
+export const metadata: Metadata = {
+  title: "Utilaje | Contact",
+  description: "Contact",
+  keywords: ["Utilaje", "Contact utilaje"],
+};
 
 export default function Contact() {
   return (

@@ -1,10 +1,17 @@
 import Image from "next/image";
+import { Metadata } from "next";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
 
 import { Paper } from "@mui/material";
 
 import formatPrice from "utils/format-price";
+
+export const metadata: Metadata = {
+  title: "Utilaje de vanzare",
+  description: "Utilaje de vanzare",
+  keywords: ["utilaje", "vanzare", "agricole", "constructii", "masinarii"],
+};
 
 async function getData() {
   const data = await prisma.post.findMany({
