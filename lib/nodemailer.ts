@@ -1,4 +1,5 @@
 import * as nodemailer from "nodemailer";
+import { Success } from "types/success";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -24,12 +25,14 @@ const mailOptions = {
     `,
 };
 
-export function sendEmail() {
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Email sent: " + info.response);
-    }
+export function sendEmail(): Promise<Error | Success> {
+  return new Promise((resolve, reject) => {
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        reject(error);
+      } else {
+        resolve({ success: true, message: "Email sent: " + info.response });
+      }
+    });
   });
 }

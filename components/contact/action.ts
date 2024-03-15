@@ -17,13 +17,14 @@ export async function submitContact(prevState: any, formData: FormData) {
     phone: formData.get("phone"),
     message: formData.get("message"),
   });
-  console.log("🚀 ~ data:", data);
 
+  let res;
   try {
-    sendEmail();
+    res = await sendEmail();
+    console.log("🚀 ~ res:", res);
   } catch (error) {
     console.log("🚀 ~ error:", error);
   }
 
-  return {};
+  return res;
 }

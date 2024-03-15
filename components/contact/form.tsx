@@ -2,6 +2,9 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { submitContact } from "./action";
+import { useEffect, useState } from "react";
+import { isSuccess } from "types/success";
+import { Alert, Snackbar } from "@mui/material";
 
 const initialState = {
   name: "",
@@ -13,6 +16,17 @@ const initialState = {
 export default function ContactForm() {
   const { pending } = useFormStatus();
   const [state, formAction] = useFormState(submitContact, initialState);
+  const [severity, setSeverity] = useState<undefined | "success" | "error">();
+
+  useEffect(() => {
+    if (isSuccess(state)) {
+      setSeverity("success");
+    }
+
+    if (state instanceof Error) {
+      setSeverity("error");
+    }
+  }, [state, pending]);
 
   return (
     <div className="w-full lg:w-2/5 p-5">
@@ -60,6 +74,14 @@ export default function ContactForm() {
             className="p-2 rounded-lg border border-gray-400"
           />
         </div>
+
+        {severity && (
+          <Alert severity={severity} variant="filled" className="mt-2">
+            {severity === "success"
+              ? "Mesajul a fost trimis cu succes!"
+              : "A aparut o eroare!"}
+          </Alert>
+        )}
 
         <button
           type="submit"
