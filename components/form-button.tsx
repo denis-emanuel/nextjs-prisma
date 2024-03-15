@@ -19,10 +19,10 @@ export const FormButton: React.FC<CustomButtonProps> = (
     <>
       {pending === true ? (
         <div
-          className="flex items-center justify-center text-primary-dark"
+          className="flex items-center justify-center text-primary"
           aria-disabled={pending}
         >
-          <CircularProgress />
+          <CircularProgress color="inherit" />
         </div>
       ) : (
         <button {...rest} className={className}>
