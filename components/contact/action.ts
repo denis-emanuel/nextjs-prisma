@@ -21,9 +21,8 @@ export async function submitContact(prevState: any, formData: FormData) {
   let res;
   try {
     res = await sendEmail();
-    console.log("🚀 ~ res:", res);
   } catch (error) {
-    console.log("🚀 ~ error:", error);
+    res = error;
   }
 
   return res;

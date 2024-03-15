@@ -26,6 +26,14 @@ export default function ContactForm() {
     if (state instanceof Error) {
       setSeverity("error");
     }
+
+    // Reset severity after 4 seconds
+    const timeoutId = setTimeout(() => {
+      setSeverity(undefined);
+    }, 4000);
+
+    // Clean up the timeout to avoid memory leaks
+    return () => clearTimeout(timeoutId);
   }, [state, pending]);
 
   return (
@@ -76,7 +84,7 @@ export default function ContactForm() {
         </div>
 
         {severity && (
-          <Alert severity={severity} variant="filled" className="mt-2">
+          <Alert severity={severity} variant="filled" className="mt-2 ease-in">
             {severity === "success"
               ? "Mesajul a fost trimis cu succes!"
               : "A aparut o eroare!"}
