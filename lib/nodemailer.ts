@@ -26,6 +26,7 @@ const mailOptions = {
 };
 
 export function sendEmail(): Promise<Error | Success> {
+  console.log(process.env.EMAIL_USERNAME, process.env.EMAIL_TO);
   return new Promise((resolve, reject) => {
     transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
