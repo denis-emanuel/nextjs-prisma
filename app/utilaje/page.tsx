@@ -29,7 +29,7 @@ export default async function Utilaje() {
         {data.map((post) => (
           <div key={post.id} className="w-full lg:w-1/3 p-1 lg:px-5 mb-2">
             <Link href={`/utilaje/${post.id}`}>
-              <Paper>
+              <Paper className="border-l-4 border-orange-300">
                 <div
                   className="relative w-full h-0"
                   style={{ paddingTop: "100%" }}
@@ -39,7 +39,7 @@ export default async function Utilaje() {
                     alt={post.title}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-t-lg"
+                    className="rounded-tr-lg"
                   />
                 </div>
                 <div className="p-2 lg:p-5">
