@@ -5,7 +5,7 @@ import { z } from "zod";
 
 export async function submitContact(prevState: any, formData: FormData) {
   const schema = z.object({
-    name: z.string().min(3),
+    name: z.string(),
     email: z.string().email(),
     phone: z.string().optional(),
     message: z.string(),

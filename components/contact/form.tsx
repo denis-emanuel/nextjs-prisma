@@ -1,10 +1,13 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { submitContact } from "./action";
 import { useEffect, useState } from "react";
-import { isSuccess } from "types/success";
 import Snackbar from "@mui/joy/Snackbar";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import { submitContact } from "./action";
+import { isSuccess } from "types/success";
+import { FormButton } from "../form-button";
 
 const initialState = {
   name: "",
@@ -78,13 +81,12 @@ export default function ContactForm() {
           />
         </div>
 
-        <button
+        <FormButton
           type="submit"
           className="rounded-lg p-2 bg-primary text-white font-bold"
-          aria-disabled={pending}
         >
           Trimite
-        </button>
+        </FormButton>
       </form>
 
       <Snackbar
