@@ -52,11 +52,11 @@ export default async function Utilaje() {
                   </p>
 
                   <div className="mt-2 italic text-gray-500 text-sm">
-                    <div>
+                    <div className="tracking-tight">
                       Data postarii:{" "}
                       {post.createdAt.toLocaleDateString("ro-RO")}
                     </div>
-                    <div>
+                    <div className="tracking-tight">
                       Ultima actualizare:{" "}
                       {post.updatedAt.toLocaleDateString("ro-RO")}
                     </div>
