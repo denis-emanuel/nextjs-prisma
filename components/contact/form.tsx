@@ -4,7 +4,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { submitContact } from "./action";
 import { useEffect, useState } from "react";
 import { isSuccess } from "types/success";
-import { Alert, Snackbar } from "@mui/material";
+import Snackbar from "@mui/joy/Snackbar";
 
 const initialState = {
   name: "",
@@ -16,24 +16,19 @@ const initialState = {
 export default function ContactForm() {
   const { pending } = useFormStatus();
   const [state, formAction] = useFormState(submitContact, initialState);
-  const [severity, setSeverity] = useState<undefined | "success" | "error">();
+  const [severity, setSeverity] = useState<"success" | "danger">("success");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (isSuccess(state)) {
       setSeverity("success");
+      setIsOpen(true);
     }
 
     if (state instanceof Error) {
-      setSeverity("error");
+      setSeverity("danger");
+      setIsOpen(true);
     }
-
-    // Reset severity after 4 seconds
-    const timeoutId = setTimeout(() => {
-      setSeverity(undefined);
-    }, 4000);
-
-    // Clean up the timeout to avoid memory leaks
-    return () => clearTimeout(timeoutId);
   }, [state, pending]);
 
   return (
@@ -83,14 +78,6 @@ export default function ContactForm() {
           />
         </div>
 
-        {severity && (
-          <Alert severity={severity} variant="filled" className="mt-2 ease-in">
-            {severity === "success"
-              ? "Mesajul a fost trimis cu succes!"
-              : "A aparut o eroare!"}
-          </Alert>
-        )}
-
         <button
           type="submit"
           className="rounded-lg p-2 bg-primary text-white font-bold"
@@ -99,6 +86,23 @@ export default function ContactForm() {
           Trimite
         </button>
       </form>
+
+      <Snackbar
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        color={severity}
+        variant="solid"
+        open={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+      >
+        {severity === "success" ? (
+          <span>Mesajul a fost trimis cu succes!</span>
+        ) : (
+          <span>A aparut o eroare!</span>
+        )}
+      </Snackbar>
     </div>
   );
 }
