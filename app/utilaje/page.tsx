@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { Metadata } from "next";
 import Link from "next/link";
-import prisma from "@/lib/prisma";
-
+import { getServerSession } from "next-auth";
 import { Paper } from "@mui/material";
 
+import prisma from "@/lib/prisma";
 import formatPrice from "utils/format-price";
+import { Role } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "Utilaje de vanzare",
@@ -23,14 +24,38 @@ async function getData() {
   return data;
 }
 
+async function getUserRole(): Promise<Role | null> {
+  const session = await getServerSession();
+
+  if (!session || !session.user || !session.user.email) {
+    return null;
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  });
+
+  return user?.role ?? null;
+}
+
 export default async function Utilaje() {
   const data = await getData();
+  const userRole = await getUserRole();
 
   return (
     <div className="w-full h-full pt-2">
       <h1 className="text-xl lg:text-3xl font-extrabold text-center text-gray-800 mb-3 lg:mb-5">
         Utilaje de vanzare
       </h1>
+      {userRole === "ADMIN" && (
+        <Link href="/protected/adauga-utilaj">
+          <button className="ml-5 md:absolute md:right-12 md:top-5 md:mt-12 md:mr-0 md:left-auto md:w-auto rounded-lg bg-primary p-2 font-bold text-center">
+            ADAUGA
+          </button>
+        </Link>
+      )}
 
       <div className="w-full md:flex md:flex-row">
         {data.map((post) => (
