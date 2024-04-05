@@ -1,3 +1,5 @@
+"use server";
+
 import { getServerSession } from "next-auth";
 import prisma from "@/lib/prisma";
 import { Role } from "@prisma/client";
