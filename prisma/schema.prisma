@@ -9,16 +9,16 @@ datasource db {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String
-  content   Json?
-  sold      Boolean? @default(false)
-  price     Float
-  authorId  String?
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  images    Image[]
-  author    User?    @relation(fields: [authorId], references: [id])
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  sold        Boolean? @default(false)
+  price       Float
+  authorId    String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  images      Image[]
+  author      User?    @relation(fields: [authorId], references: [id])
 
   @@map("posts")
 }
@@ -33,7 +33,7 @@ model Image {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   name      String?
   email     String   @unique
   password  String?
