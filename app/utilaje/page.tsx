@@ -18,7 +18,7 @@ export default async function Utilaje() {
   const isAdmin = await isUserAdmin();
 
   return (
-    <div className="w-full h-full pt-2">
+    <div className="w-full min-h-screen pt-2">
       <h1 className="text-xl lg:text-3xl font-extrabold text-center text-gray-800 mb-3 lg:mb-5">
         Utilaje de vanzare
       </h1>
@@ -30,9 +30,9 @@ export default async function Utilaje() {
         </Link>
       )}
 
-      <div className="w-full md:flex md:flex-row">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
         {posts.map((post) => (
-          <div key={post.id} className="w-full lg:w-1/3 p-1 lg:px-5 mb-2">
+          <div key={post.id} className="p-3">
             <Link href={`/utilaje/${post.id}`}>
               <Paper className="border-l-4 border-orange-300">
                 <div
