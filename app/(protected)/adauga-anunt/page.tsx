@@ -1,27 +1,40 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useRef, useState } from "react";
+import { useFormStatus } from "react-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
-import onNewPostSubmit from "./submit-form";
-import Image from "next/image";
-
-const initialState = {
-  title: "",
-  price: 0,
-  description: "",
-  files: null,
-};
+import newPostSubmit from "./submit-form";
+import { isSuccess } from "types/success";
+import Snackbar from "@mui/joy/Snackbar";
 
 export default function CreateUtilaj() {
+  const [severity, setSeverity] = useState<"success" | "danger">("success");
+  const [isOpen, setIsOpen] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
   const { pending } = useFormStatus();
-  const [formState, formAction] = useFormState(onNewPostSubmit, initialState);
+  async function handleSubmit(formData: FormData) {
+    const response = await newPostSubmit(formData);
+
+    if (isSuccess(response)) {
+      setSeverity("success");
+      formRef?.current?.reset();
+    } else {
+      setSeverity("danger");
+    }
+    setIsOpen(true);
+  }
 
   return (
     <div className="container mx-auto mt-2 md:mt-5 p-3 md:pt-5 md:px-40">
       <h2 className="text-2xl mb-2 lg:text-3xl lg:mb-5">Anunt nou</h2>
 
-      <form action={formAction} className="flex flex-col space-y-4">
+      <form
+        ref={formRef}
+        action={handleSubmit}
+        className="flex flex-col space-y-4"
+      >
         <div className="flex flex-col">
           <label htmlFor="name" className="text-sm font-medium">
             Titlu
@@ -81,6 +94,23 @@ export default function CreateUtilaj() {
           {pending ? <CircularProgress /> : "Adauga anunt"}
         </button>
       </form>
+
+      <Snackbar
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        color={severity}
+        variant="solid"
+        open={isOpen}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+      >
+        {severity === "success" ? (
+          <span>Anuntul a fost adaugat cu succes cu succes!</span>
+        ) : (
+          <span>A aparut o eroare!</span>
+        )}
+      </Snackbar>
     </div>
   );
 }

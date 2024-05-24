@@ -2,12 +2,13 @@
 
 import uploadImage from "@/app/actions/upload-image";
 import prisma from "@/lib/prisma";
+import { Success } from "types/success";
+
 import { v4 as uuidv4 } from "uuid";
 
-export default async function onNewPostSubmit(
-  prevState: any,
+export default async function newPostSubmit(
   formData: FormData
-) {
+): Promise<Success | Error> {
   // create post transaction
   const postId = uuidv4();
   const createPost = prisma.post.create({
@@ -34,7 +35,7 @@ export default async function onNewPostSubmit(
   const imageUploads = await Promise.all(promises);
   for (const upload of imageUploads) {
     if (!upload.ok) {
-      throw new Error("Failed to upload images");
+      return new Error("Failed to upload images");
     }
   }
 
@@ -48,5 +49,5 @@ export default async function onNewPostSubmit(
 
   await prisma.$transaction([createPost, createImages]);
 
-  return null;
+  return { success: true };
 }

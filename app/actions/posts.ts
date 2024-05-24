@@ -9,7 +9,3 @@ export async function getPosts() {
 
   return data;
 }
-
-export async function createPost(prevState: any, formData: FormData) {
-  // TODO
-}
