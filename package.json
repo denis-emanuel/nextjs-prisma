@@ -19,6 +19,7 @@
     "@prisma/client": "^4.16.2",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
+    "@types/uuid": "^9.0.8",
     "bcrypt": "^5.1.0",
     "formik": "^2.4.5",
     "googleapis": "^134.0.0",
@@ -28,6 +29,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
+    "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
