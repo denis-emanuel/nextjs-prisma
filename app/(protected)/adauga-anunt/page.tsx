@@ -10,18 +10,21 @@ import Snackbar from "@mui/joy/Snackbar";
 
 export default function CreateUtilaj() {
   const [severity, setSeverity] = useState<"success" | "danger">("success");
+  const [apiMessage, setApiMessage] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-
   const { pending } = useFormStatus();
-  async function handleSubmit(formData: FormData) {
-    const response = await newPostSubmit(formData);
 
-    if (isSuccess(response)) {
-      setSeverity("success");
-      formRef?.current?.reset();
-    } else {
+  async function handleSubmit(formData: FormData) {
+    try {
+      const response = await newPostSubmit(formData);
+      if (isSuccess(response)) {
+        setSeverity("success");
+        formRef?.current?.reset();
+      }
+    } catch (error) {
       setSeverity("danger");
+      setApiMessage((error as Error).message);
     }
     setIsOpen(true);
   }
@@ -105,10 +108,14 @@ export default function CreateUtilaj() {
           setIsOpen(false);
         }}
       >
-        {severity === "success" ? (
+        {severity === "success" && (
           <span>Anuntul a fost adaugat cu succes cu succes!</span>
-        ) : (
-          <span>A aparut o eroare!</span>
+        )}
+        {severity === "danger" && (
+          <div>
+            <p>A aparut o eroare!</p>
+            <p>{apiMessage}</p>
+          </div>
         )}
       </Snackbar>
     </div>

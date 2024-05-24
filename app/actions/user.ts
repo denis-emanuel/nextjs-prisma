@@ -31,3 +31,17 @@ export async function isUserAuthenticated(): Promise<boolean> {
 
   return role !== null;
 }
+
+export async function getLoggedInUser() {
+  const session = await getServerSession();
+
+  if (!session || !session.user || !session.user.email) {
+    return null;
+  }
+
+  return prisma.user.findUnique({
+    where: {
+      email: session.user.email,
+    },
+  });
+}

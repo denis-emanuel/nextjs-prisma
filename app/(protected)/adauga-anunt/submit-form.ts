@@ -1,6 +1,7 @@
 "use server";
 
 import uploadImage from "@/app/actions/upload-image";
+import { getLoggedInUser, isUserAdmin } from "@/app/actions/user";
 import prisma from "@/lib/prisma";
 import { Success } from "types/success";
 
@@ -9,6 +10,16 @@ import { v4 as uuidv4 } from "uuid";
 export default async function newPostSubmit(
   formData: FormData
 ): Promise<Success | Error> {
+  const user = await getLoggedInUser();
+  if (!user) {
+    throw new Error("Trebuie sa fii logat pentru a adauga anunturi");
+  }
+
+  const isAdmin = await isUserAdmin();
+  if (!isAdmin) {
+    throw new Error("Nu ai acces sa adaugi anunturi");
+  }
+
   // create post transaction
   const postId = uuidv4();
   const createPost = prisma.post.create({
@@ -17,6 +28,7 @@ export default async function newPostSubmit(
       title: formData.get("title") as string,
       price: Number(formData.get("price")),
       description: formData.get("description") as string,
+      authorId: user.id,
     },
   });
 
@@ -35,7 +47,7 @@ export default async function newPostSubmit(
   const imageUploads = await Promise.all(promises);
   for (const upload of imageUploads) {
     if (!upload.ok) {
-      return new Error("Failed to upload images");
+      throw new Error("Eroare la incarcarea imaginii");
     }
   }
 
@@ -47,7 +59,10 @@ export default async function newPostSubmit(
     })),
   });
 
-  await prisma.$transaction([createPost, createImages]);
+  const res = await prisma.$transaction([createPost, createImages]);
+  if (!res) {
+    throw new Error("Eroare la crearea anuntului");
+  }
 
   return { success: true };
 }
