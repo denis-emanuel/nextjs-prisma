@@ -23,7 +23,7 @@ export default async function Utilaje() {
         Utilaje de vanzare
       </h1>
       {isAdmin && (
-        <Link href="/protected/adauga-utilaj">
+        <Link href="/adauga-anunt">
           <button className="ml-5 md:absolute md:right-12 md:top-5 md:mt-12 md:mr-0 md:left-auto md:w-auto rounded-lg bg-primary p-2 font-bold text-center">
             ADAUGA
           </button>
