@@ -61,9 +61,9 @@ export default async function Utilaj({ params }: UtilajProps) {
                 <div>{data?.createdAt.toLocaleDateString("ro-RO")}</div>
               </div>
 
-              <h3 className="text-lg text-gray-800">
+              <h2 className="text-lg text-gray-800">
                 {data?.title ?? "Titlu"}
-              </h3>
+              </h2>
 
               <div className="text-green-600 font-bold text-xl">
                 {data?.price ?? 0} &euro;
@@ -71,7 +71,8 @@ export default async function Utilaj({ params }: UtilajProps) {
             </div>
 
             <div className="tracking-tighter pt-4">
-              <p>DESCRIERE</p>
+              <p className="mb-2">DESCRIERE</p>
+              <p className="text-gray-800">{data?.description}</p>
             </div>
           </div>
         </Paper>

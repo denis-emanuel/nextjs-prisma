@@ -37,8 +37,8 @@ export function ImagesCarousel({ imageUrls }: ImageCarouselProps) {
               <Image
                 src={imageUrl}
                 alt="imagini"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "contain" }}
               />
             </div>
           ))}
@@ -68,8 +68,8 @@ export function ImagesCarousel({ imageUrls }: ImageCarouselProps) {
           <Image
             src="/no-image.jpg"
             alt="imagini"
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: "contain" }}
           />
           <div className="z-10 text-black-dark absolute -bottom-6 lg:-bottom-8 left-0 right-0 flex justify-center items-center mt-2 lg:text-2xl">
             <div>nicio imagine</div>
