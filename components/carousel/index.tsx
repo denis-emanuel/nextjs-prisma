@@ -5,6 +5,9 @@ import React, { useState } from "react";
 
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
+
+import styles from "./style.module.css";
 
 type ImageCarouselProps = {
   imageUrls: string[];
@@ -12,6 +15,16 @@ type ImageCarouselProps = {
 
 export function ImagesCarousel({ imageUrls }: ImageCarouselProps) {
   const [currentImage, setCurrentImage] = useState(0);
+  // State variable for managing zoomed image
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
+  // Function to open zoomed image
+  const openZoomedImage = (imageUrl: string) => {
+    setZoomedImage(imageUrl);
+  };
+  // Function to close zoomed image
+  const closeZoomedImage = () => {
+    setZoomedImage(null);
+  };
 
   const nextImage = () => {
     if (imageUrls.length === 0) return;
@@ -40,14 +53,18 @@ export function ImagesCarousel({ imageUrls }: ImageCarouselProps) {
                 fill
                 style={{ objectFit: "contain" }}
               />
+              <ZoomOutMapIcon
+                className="cursor-pointer absolute -bottom-8 md:bottom-0 right-2 md:right-0 text-black text-2xl md:text-3xl lg:text-4xl hover:text-gray-300 z-50"
+                onClick={() => openZoomedImage(imageUrl)}
+              />
             </div>
           ))}
-          <div className="z-10 text-black-dark absolute -bottom-6 lg:-bottom-8 left-0 right-0 flex justify-center items-center mt-2 lg:text-2xl">
+          <div className="z-20 text-black-dark absolute -bottom-8 lg:-bottom-8 left-0 right-0 flex justify-center items-center mt-2 lg:text-2xl">
             <div>
               {currentImage + 1} / {imageUrls.length}
             </div>
           </div>
-          <div className="absolute h-full top-0 left-0 right-0 flex justify-between">
+          <div className="z-20 absolute h-full top-0 left-0 right-0 flex justify-between">
             <button
               onClick={prevImage}
               className="md:rounded-r-lg h-full w-10 md:h-20 md:w-10 lg:h-16 md:hover:ring-2 absolute left-0 top-1/2 transform -translate-y-1/2 bg-gradient-to-l from-transparent to-gray-600 hover:from-transparent hover:to-gray-700"
@@ -75,6 +92,17 @@ export function ImagesCarousel({ imageUrls }: ImageCarouselProps) {
             <div>nicio imagine</div>
           </div>
         </>
+      )}
+      {zoomedImage && (
+        <div className={styles.zoomedImageContainer} onClick={closeZoomedImage}>
+          <Image
+            src={zoomedImage}
+            alt="zoomed-image"
+            layout="fill"
+            objectFit="contain"
+          />
+          Denis
+        </div>
       )}
     </>
   );

@@ -54,7 +54,7 @@ export default async function Utilaj({ params }: UtilajProps) {
     <div className="w-screen h-screen mx-auto pt-2 px-2 md:px-10 lg:px-20">
       <div className="w-full md:w-3/4 h-1/2 md:h-3/5 relative mx-auto">
         <ImagesCarousel imageUrls={imageUrls ?? []} />
-        <Paper className="mt-8 lg:mt-10">
+        <Paper className="mt-10 lg:mt-10">
           <div className="p-2 lg:px-5 lg:py-3 divide-y-2 space-y-4">
             <div className="space-y-1">
               <div className="mt-2 italic text-gray-500 text-sm">
