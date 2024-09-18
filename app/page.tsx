@@ -22,13 +22,13 @@ export default function Home() {
           <h2 className="text-lg lg:text-xl text-center">
             Vinde și cumpără utilaje rapid și ușor!
           </h2>
-          <p className="text-center">
+          <p className="text-center text-sm md:text-base">
             Te ajutăm să găsești utilajele de care ai nevoie sau să vinzi ceea
             ce nu mai folosești.
           </p>
-          <p className="text-center">
+          <p className="text-center text-base">
             <Link
-              className="text-white font-bold rounded-full bg-black px-4 py-3"
+              className="text-white font-bold rounded-full bg-black px-2 md:px-4 py-2 md:py-3 hover:bg-gray-800"
               href="/utilaje"
             >
               Descoperă <OpenInNewIcon className="inline" />
@@ -37,17 +37,17 @@ export default function Home() {
           </p>
         </Paper>
 
-        <Paper className="w-full md:w-2/5 flex flex-col items-center px-4 py-4 space-y-6 mb-4">
+        <Paper className="w-full md:w-2/5 flex flex-col items-center px-4 py-4 space-y-4 mb-4">
           <h2 className="text-lg lg:text-xl text-center">
             Transformă echipamentul nefolosit în bani!
           </h2>
-          <p className="text-center">
+          <p className="text-center text-sm md:text-base">
             Publică-ți anunțul pe platforma noastră și găsește cumpărători
             locali.
           </p>
-          <p className="text-center">
+          <p className="text-center text-base">
             <Link
-              className="text-white font-bold rounded-full bg-black px-4 py-3"
+              className="text-white font-bold rounded-full bg-black px-2 md:px-4 py-2 md:py-3 hover:bg-gray-800"
               href="/contact"
             >
               <ContactPageIcon className="inline" /> Contactează
