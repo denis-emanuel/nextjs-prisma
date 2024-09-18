@@ -1,34 +1,29 @@
 "use client";
 
 import { useFormState, useFormStatus } from "react-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Snackbar from "@mui/joy/Snackbar";
-import CircularProgress from "@mui/material/CircularProgress";
 
-import { submitContact } from "./action";
-import { isSuccess } from "types/success";
+import { submitContact } from "./actions";
 import { FormButton } from "../form-button";
 
-const initialState = {
-  name: "",
-  email: "",
-  phone: "",
-  message: "",
-};
-
 export default function ContactForm() {
+  const ref = useRef<HTMLFormElement>(null);
   const { pending } = useFormStatus();
-  const [state, formAction] = useFormState(submitContact, initialState);
+  const [state, formAction] = useFormState(submitContact, {
+    success: false,
+    message: "",
+  });
   const [severity, setSeverity] = useState<"success" | "danger">("success");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (isSuccess(state)) {
+    if (state.success) {
       setSeverity("success");
       setIsOpen(true);
     }
 
-    if (state instanceof Error) {
+    if (!state.success) {
       setSeverity("danger");
       setIsOpen(true);
     }
@@ -38,7 +33,14 @@ export default function ContactForm() {
     <div className="w-full lg:w-2/5 p-5">
       <h2 className="text-2xl mb-2 lg:text-3xl lg:mb-5">Formular de contact</h2>
 
-      <form className="flex flex-col space-y-4" action={formAction}>
+      <form
+        ref={ref}
+        className="flex flex-col space-y-4"
+        action={formAction}
+        onSubmit={() => {
+          ref.current?.reset();
+        }}
+      >
         <div className="flex flex-col">
           <label htmlFor="name">Nume</label>
           <input
@@ -102,7 +104,7 @@ export default function ContactForm() {
         {severity === "success" ? (
           <span>Mesajul a fost trimis cu succes!</span>
         ) : (
-          <span>A aparut o eroare!</span>
+          <span>A aparut o eroare: {state.message}</span>
         )}
       </Snackbar>
     </div>
