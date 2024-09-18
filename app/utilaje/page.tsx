@@ -18,21 +18,23 @@ export default async function Utilaje() {
   const isAdmin = await isUserAdmin();
 
   return (
-    <div className="w-full min-h-screen pt-2">
-      <h1 className="text-xl lg:text-3xl font-extrabold text-center text-gray-800 mb-3 lg:mb-5">
-        Utilaje de vanzare
-      </h1>
-      {isAdmin && (
-        <Link href="/adauga-anunt">
-          <button className="ml-5 md:absolute md:right-12 md:top-5 md:mt-12 md:mr-0 md:left-auto md:w-auto rounded-lg bg-primary p-2 font-bold text-center">
-            ADAUGA
-          </button>
-        </Link>
-      )}
+    <div className="w-full min-h-screen pt-2 px-4 md:px-24">
+      <div className="flex flex-row justify-between my-4">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-center text-gray-800 mb-3 lg:mb-5">
+          Utilaje de vanzare
+        </h1>
+        {isAdmin && (
+          <Link href="/adauga-anunt">
+            <button className="ml-5 md:absolute md:right-24 md:top-5 md:mt-12 md:mr-0 md:left-auto md:w-auto rounded-lg bg-primary p-2 font-bold text-center">
+              ADAUGA
+            </button>
+          </Link>
+        )}
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 w-full">
         {posts.map((post) => (
-          <div key={post.id} className="p-3">
+          <div key={post.id}>
             <Link href={`/utilaje/${post.id}`}>
               <Paper className="border-l-4 border-orange-300">
                 <div
