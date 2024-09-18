@@ -13,13 +13,13 @@ export const metadata: Metadata = {
 export default function Contact() {
   return (
     <div className="container pt-5 px-2 lg:px-15 lg:flex lg:flex-row lg:justify-around">
+      <ContactForm />
       <div>
         <ContactInfo />
         <div className="h-screen md:h-2/3 w-full">
           <MapProvider />
         </div>
       </div>
-      <ContactForm />
     </div>
   );
 }
