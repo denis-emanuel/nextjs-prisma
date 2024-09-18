@@ -12,7 +12,12 @@ export default function NavLink({
   const navPath = getNavBarPath(pathname);
 
   return (
-    <Link href={href} className={`${navPath === href && "text-primary-dark"}`}>
+    <Link
+      href={href}
+      className={`${
+        navPath === href && "text-primary-dark"
+      } hover:text-primary`}
+    >
       {name}
     </Link>
   );

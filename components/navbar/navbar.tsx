@@ -8,7 +8,7 @@ import MobileNav from "./mobile-nav";
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center py-3 px-10 italic font-serif bg-black font-bold text-white">
+    <nav className="flex justify-between items-center py-3 px-10 font-serif bg-black font-bold text-white">
       <Link href="/" className="flex items-center">
         <Image
           src="/logo3.jpg"

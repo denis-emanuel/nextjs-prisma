@@ -31,16 +31,23 @@ export default function MobileNav() {
 
   return (
     <div ref={mobileMenuRef} onClick={toggleMobileMenu}>
-      <DensityMediumSharpIcon className="inline-block cursor-pointer lg:hidden" />
+      <DensityMediumSharpIcon
+        className={`inline-block cursor-pointer lg:hidden ${
+          isMobileMenuOpen ? "text-primary-dark" : "text-white"
+        }`}
+      />
 
       <div
         className={`${
-          isMobileMenuOpen ? "block" : "hidden"
-        } lg:hidden z-10 absolute top-14 right-0`}
+          isMobileMenuOpen ? "block opacity-100" : "opacity-0"
+        } lg:opacity-0 z-10 absolute top-14 right-0 transition-opacity ease-in-out delay-150 duration-300`}
       >
         <ul className="flex flex-col items-center border divide-y divide-white">
           {NavbarItems.map((item, index) => (
-            <li key={index} className="py-2 w-full px-3 bg-black">
+            <li
+              key={index}
+              className="py-3 w-full px-6 bg-black hover:bg-gray-600"
+            >
               <NavLink href={item.href} name={item.name} />
             </li>
           ))}

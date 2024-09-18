@@ -8,7 +8,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 export default function DesktopNav() {
   return (
     <>
-      <ul className="hidden h-full gap-12 lg:flex">
+      <ul className="hidden h-full lg:flex">
         <Breadcrumbs
           separator={<CircleIcon fontSize="small" className="square h-2" />}
           aria-label="breadcrumb"
