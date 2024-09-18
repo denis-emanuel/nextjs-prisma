@@ -1,6 +1,6 @@
 export default function ContactInfo() {
   return (
-    <div className="w-full lg:w-2/5 mb-5 p-5 text-md divide-y-8 divide-opacity-0 divide-white">
+    <div className="w-full mb-5 p-5 text-md divide-y-8 divide-opacity-0 divide-white">
       <h2 className="text-2xl mb-2 lg:text-3xl lg:mb-5">
         Informatii de contact
       </h2>

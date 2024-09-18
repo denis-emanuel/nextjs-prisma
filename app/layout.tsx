@@ -8,6 +8,7 @@ import SessionProvider from "@/components/session-provider/session-provider";
 
 import "@/styles/globals.css";
 import Navbar from "@/components/navbar/navbar";
+import { MapProvider } from "@/lib/maps-provider";
 
 const inter = Inter({
   variable: "--font-inter",

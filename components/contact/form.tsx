@@ -23,7 +23,7 @@ export default function ContactForm() {
       setIsOpen(true);
     }
 
-    if (!state.success) {
+    if (state.message && !state.success) {
       setSeverity("danger");
       setIsOpen(true);
     }
@@ -101,9 +101,10 @@ export default function ContactForm() {
           setIsOpen(false);
         }}
       >
-        {severity === "success" ? (
+        {severity === "success" && (
           <span>Mesajul a fost trimis cu succes!</span>
-        ) : (
+        )}
+        {severity === "danger" && (
           <span>A aparut o eroare: {state.message}</span>
         )}
       </Snackbar>
