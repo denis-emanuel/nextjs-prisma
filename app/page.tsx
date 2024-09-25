@@ -57,7 +57,7 @@ export default function Home() {
         </Paper>
       </div>
 
-      <div className="container mx-auto py-2 lg:px-10 lg:pt-10">
+      <div className="container mx-auto bg-diagonal-stripes rounded-2xl px-3 py-3 my-2 lg:px-10 lg:py-10 lg:my-10">
         <div className="-m-1 flex flex-wrap md:-m-2">
           <div className="flex w-full md:w-1/2 flex-wrap">
             <div className="w-1/2 p-1 md:p-2">

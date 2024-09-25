@@ -23,6 +23,10 @@ module.exports = {
           pale: "#FFDAB9", // A pale yellow-orange shade
         },
       },
+      backgroundImage: {
+        "diagonal-stripes":
+          "repeating-linear-gradient(45deg, rgba(255, 255, 0, 0.5), rgba(181, 181, 20, 0.5) 20px, rgba(0, 0, 0, 0.2) 20px, rgba(0, 0, 0, 0.2) 40px)",
+      },
     },
   },
   plugins: [],
