@@ -3,6 +3,7 @@ import { DeleteButton, MarkSoldButton } from "./post-buttons";
 import prisma from "@/lib/prisma";
 import { Paper } from "@mui/material";
 import { ResolvingMetadata } from "next";
+import { isUserAdmin } from "@/app/actions/user";
 
 type UtilajProps = {
   params: { id: string };
@@ -50,6 +51,7 @@ export default async function Utilaj({ params }: UtilajProps) {
   const imageUrls = data?.images
     .filter((image) => image.url !== null)
     .map((image) => image.url);
+  const isAdmin = await isUserAdmin();
 
   return (
     <div className="w-full h-screen mx-auto px-2 py-10 md:px-10 lg:px-20">
@@ -78,12 +80,14 @@ export default async function Utilaj({ params }: UtilajProps) {
           </div>
         </Paper>
 
-        <div className="flex flex-wrap mt-4">
-          <DeleteButton id={params.id} className="mb-4 md:mb-0 md:mr-4">
-            Șterge
-          </DeleteButton>
-          <MarkSoldButton id={params.id}>Marchează ca vândut</MarkSoldButton>
-        </div>
+        {isAdmin && (
+          <div className="flex flex-wrap mt-4">
+            <DeleteButton id={params.id} className="mb-4 md:mb-0 md:mr-4">
+              Șterge
+            </DeleteButton>
+            <MarkSoldButton id={params.id}>Marchează ca vândut</MarkSoldButton>
+          </div>
+        )}
       </div>
     </div>
   );
