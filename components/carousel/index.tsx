@@ -59,7 +59,7 @@ export function ImagesCarousel({ imageUrls }: ImageCarouselProps) {
               />
             </div>
           ))}
-          <div className="z-20 text-black-dark absolute -bottom-8 lg:-bottom-8 left-0 right-0 flex justify-center items-center mt-2 lg:text-2xl">
+          <div className="z-20 text-black-dark absolute -bottom-8 lg:-bottom-8 left-0 right-0 flex justify-center items-center mt-2 lg:text-lg">
             <div>
               {currentImage + 1} / {imageUrls.length}
             </div>
