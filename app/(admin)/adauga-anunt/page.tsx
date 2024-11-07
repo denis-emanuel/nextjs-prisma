@@ -62,6 +62,21 @@ export default function CreateUtilaj() {
           />
         </div>
 
+        <div className="flex flex-col">
+          <label htmlFor="listingType" className="text-sm font-medium">
+            Tip listare
+          </label>
+          <select
+            name="listingType"
+            id="listingType"
+            className="p-2 rounded-lg border border-gray-400"
+            defaultValue="FOR_SALE"
+          >
+            <option value="FOR_SALE">vanzare</option>
+            <option value="FOR_RENT">inchiriere</option>
+          </select>
+        </div>
+
         <div>
           <label
             htmlFor="files"

@@ -9,16 +9,17 @@ datasource db {
 }
 
 model Post {
-  id          String   @id @default(uuid())
+  id          String      @id @default(uuid())
   title       String
   description String?
-  sold        Boolean? @default(false)
+  sold        Boolean?    @default(false)
   price       Float
-  authorId    String?
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  listingType ListingType @default(FOR_SALE)
+  createdAt   DateTime    @default(now()) @map("created_at")
+  updatedAt   DateTime    @updatedAt @map("updated_at")
   images      Image[]
-  author      User?    @relation(fields: [authorId], references: [id])
+  authorId    String?
+  author      User?       @relation(fields: [authorId], references: [id])
 
   @@map("posts")
 }
@@ -48,4 +49,9 @@ model User {
 enum Role {
   USER
   ADMIN
+}
+
+enum ListingType {
+  FOR_SALE
+  FOR_RENT
 }

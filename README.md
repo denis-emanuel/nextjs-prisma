@@ -1,4 +1,12 @@
 - [Industrial equipment sale application](#industrial-equipment-sale-application)
+  - [Setup instructions](#setup-instructions)
+    - [Install dependencies](#install-dependencies)
+    - [Run the development server](#run-the-development-server)
+    - [Prisma](#prisma)
+      - [Generate Prisma client](#generate-prisma-client)
+      - [DB migration](#db-migration)
+      - [Typescript migration](#typescript-migration)
+      - [Run Prisma Studio locally](#run-prisma-studio-locally)
   - [Environment](#environment)
     - [PostgreSQL with Prisma](#postgresql-with-prisma)
     - [Emailing](#emailing)
@@ -8,6 +16,54 @@
     - [Google Maps Api](#google-maps-api)
 
 # Industrial equipment sale application
+
+## Setup instructions
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Run the development server
+
+```bash
+pnpm dev
+```
+
+### Prisma
+
+#### Generate Prisma client
+
+```bash
+pnpm prisma:generate
+```
+
+#### DB migration
+
+```bash
+npx prisma migrate dev
+```
+
+```bash
+npx prisma migrate deploy
+```
+
+#### Typescript migration
+
+Generate Prisma client with TypeScript definitions
+
+```bash
+npx prisma generate
+```
+
+If you have problems with the types delete `node_modules`, `npm install` and `npx prisma generate` again.
+
+#### Run Prisma Studio locally
+
+```bash
+npx prisma studio
+```
 
 ## Environment
 

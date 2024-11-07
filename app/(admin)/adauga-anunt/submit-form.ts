@@ -1,11 +1,12 @@
 "use server";
 
+import { v4 as uuidv4 } from "uuid";
+import prisma from "@/lib/prisma";
+import { ListingType } from "@prisma/client";
+
 import uploadImage from "@/app/actions/upload-image";
 import { getLoggedInUser, isUserAdmin } from "@/app/actions/user";
-import prisma from "@/lib/prisma";
 import { Success } from "types/success";
-
-import { v4 as uuidv4 } from "uuid";
 
 export default async function newPostSubmit(
   formData: FormData
@@ -20,6 +21,8 @@ export default async function newPostSubmit(
     throw new Error("Nu ai acces sa adaugi anunturi");
   }
 
+  console.log(formData.get("listingType"));
+
   // create post transaction
   const postId = uuidv4();
   const createPost = prisma.post.create({
@@ -27,6 +30,7 @@ export default async function newPostSubmit(
       id: postId,
       title: formData.get("title") as string,
       price: Number(formData.get("price")),
+      listingType: formData.get("listingType") as ListingType,
       description: formData.get("description") as string,
       authorId: user.id,
     },

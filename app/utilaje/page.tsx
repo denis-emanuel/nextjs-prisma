@@ -7,6 +7,8 @@ import formatPrice from "utils/format-price";
 import { isUserAdmin } from "@/app/actions/user";
 import { getPosts } from "@/app/actions/posts";
 
+import styles from "./style.module.css";
+
 export const metadata: Metadata = {
   title: "Utilaje de vanzare",
   description: "Utilaje de vanzare",
@@ -34,8 +36,23 @@ export default async function Utilaje() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 w-full">
         {posts.map((post) => (
-          <div key={post.id}>
+          <div key={post.id} className="relative overflow-hidden">
             <Link href={`/utilaje/${post.id}`}>
+              <div
+                className={`${styles.ribbon} ${
+                  post.sold === true
+                    ? "bg-red-500"
+                    : post.listingType === "FOR_SALE"
+                    ? "bg-green-500"
+                    : "bg-blue-500"
+                } rounded-l-lg`}
+              >
+                {post.sold === true
+                  ? "Vandut"
+                  : post.listingType === "FOR_SALE"
+                  ? "De vanzare"
+                  : "De inchiriat"}
+              </div>
               <Paper className="border-l-4 border-orange-300">
                 <div
                   className="relative w-full h-0"
