@@ -75,7 +75,9 @@ export default async function Utilaj({ params }: UtilajProps) {
 
             <div className="tracking-tighter pt-4">
               <p className="mb-2">DESCRIERE</p>
-              <p className="text-gray-800">{data?.description}</p>
+              <textarea readOnly className="text-gray-800 w-full h-40">
+                {data?.description}
+              </textarea>
             </div>
           </div>
         </Paper>

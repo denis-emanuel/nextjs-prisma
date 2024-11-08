@@ -21,8 +21,6 @@ export default async function newPostSubmit(
     throw new Error("Nu ai acces sa adaugi anunturi");
   }
 
-  console.log(formData.get("listingType"));
-
   // create post transaction
   const postId = uuidv4();
   const createPost = prisma.post.create({

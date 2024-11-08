@@ -2,18 +2,23 @@
 
 import { useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
+import { useRouter } from "next/navigation";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import newPostSubmit from "./submit-form";
 import { isSuccess } from "types/success";
 import Snackbar from "@mui/joy/Snackbar";
+import { TVA } from "types/constants/price";
 
 export default function CreateUtilaj() {
+  const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
+  const { pending } = useFormStatus();
+
   const [severity, setSeverity] = useState<"success" | "danger">("success");
   const [apiMessage, setApiMessage] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
-  const { pending } = useFormStatus();
+  const [price, setPrice] = useState(0);
 
   async function handleSubmit(formData: FormData) {
     try {
@@ -21,6 +26,7 @@ export default function CreateUtilaj() {
       if (isSuccess(response)) {
         setSeverity("success");
         formRef?.current?.reset();
+        router.push("/utilaje");
       }
     } catch (error) {
       setSeverity("danger");
@@ -39,7 +45,7 @@ export default function CreateUtilaj() {
         className="flex flex-col space-y-4"
       >
         <div className="flex flex-col">
-          <label htmlFor="name" className="text-sm font-medium">
+          <label htmlFor="title" className="text-sm font-medium">
             Titlu
           </label>
           <input
@@ -50,16 +56,43 @@ export default function CreateUtilaj() {
           />
         </div>
 
-        <div className="flex flex-col">
-          <label htmlFor="name" className="text-sm font-medium">
-            Pret (€)
-          </label>
-          <input
-            type="number"
-            name="price"
-            id="price"
-            className="p-1 rounded-lg border border-gray-400"
-          />
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-col">
+            <label htmlFor="price" className="text-sm font-medium">
+              Pret (€)
+            </label>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              className="p-1 rounded-lg border border-gray-400"
+              onChange={(e) => setPrice(Number(e.target.value))}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="tva" className="text-sm font-medium">
+              TVA (19%) (€)
+            </label>
+            <input
+              name="tva"
+              id="tva"
+              className="p-1 rounded-lg border border-gray-400 bg-gray-200"
+              readOnly
+              value={price * TVA ?? 0}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="total" className="text-sm font-medium">
+              Total (€)
+            </label>
+            <input
+              name="total"
+              id="total"
+              className="p-1 rounded-lg border border-gray-400 bg-gray-200"
+              readOnly
+              value={price * (1 + TVA) ?? 0}
+            />
+          </div>
         </div>
 
         <div className="flex flex-col">
@@ -69,7 +102,7 @@ export default function CreateUtilaj() {
           <select
             name="listingType"
             id="listingType"
-            className="p-2 rounded-lg border border-gray-400"
+            className="p-2 rounded-lg border border-gray-400 bg-white"
             defaultValue="FOR_SALE"
           >
             <option value="FOR_SALE">vanzare</option>
@@ -94,13 +127,14 @@ export default function CreateUtilaj() {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="name" className="text-sm font-medium">
+          <label htmlFor="description" className="text-sm font-medium">
             Descriere
           </label>
           <textarea
+            contentEditable
             name="description"
             id="description"
-            className="p-1 rounded-lg border border-gray-400"
+            className="p-1 h-40 rounded-lg border border-gray-400"
           />
         </div>
 
