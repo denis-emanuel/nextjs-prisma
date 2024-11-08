@@ -8,6 +8,7 @@ import { isUserAdmin } from "@/app/actions/user";
 import { getPosts } from "@/app/actions/posts";
 
 import styles from "./style.module.css";
+import { TVA } from "types/constants/price";
 
 export const metadata: Metadata = {
   title: "Utilaje de vanzare",
@@ -20,10 +21,10 @@ export default async function Utilaje() {
   const isAdmin = await isUserAdmin();
 
   return (
-    <div className="w-full min-h-screen pt-2 px-4 md:px-24">
+    <div className="w-full min-h-screen pt-2 pb-6 md:pb-14 px-4 md:px-24">
       <div className="flex flex-row justify-between my-4">
         <h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-center text-gray-800 mb-3 lg:mb-5">
-          Utilaje de vanzare
+          Utilaje disponibile
         </h1>
         {isAdmin && (
           <Link href="/adauga-anunt">
@@ -72,7 +73,16 @@ export default async function Utilaje() {
                   </h3>
 
                   <p className="text-green-600 text-2xl">
-                    {formatPrice(post.price)} &euro;
+                    {formatPrice(post.price)}&euro;
+                  </p>
+                  <p
+                    className={`text-green-800 text-md ${
+                      (post.listingType !== "FOR_SALE" || post.sold) &&
+                      "text-transparent"
+                    }`}
+                  >
+                    <span>{formatPrice(post.price * TVA, 2)}&euro;</span>{" "}
+                    <span>TVA</span>
                   </p>
 
                   <div className="mt-2 italic text-gray-500 text-sm">
