@@ -57,7 +57,7 @@ export default function CreateUtilaj() {
         </div>
 
         <div className="flex flex-row flex-wrap lg:justify-between gap-2">
-          <div className="flex flex-col flex-1 w-full lg:w-1/3">
+          <div className="flex flex-col lg:flex-1 w-full lg:w-1/3">
             <label htmlFor="price" className="text-sm font-medium">
               Pret (€)
             </label>
@@ -69,7 +69,7 @@ export default function CreateUtilaj() {
               onChange={(e) => setPrice(Number(e.target.value))}
             />
           </div>
-          <div className="flex flex-col flex-1 w-full lg:w-1/3">
+          <div className="flex flex-col lg:flex-1 w-full lg:w-1/3">
             <label htmlFor="tva" className="text-sm font-medium">
               TVA (19%) (€)
             </label>
@@ -81,7 +81,7 @@ export default function CreateUtilaj() {
               value={price * TVA ?? 0}
             />
           </div>
-          <div className="flex flex-col flex-1 w-full lg:w-1/3">
+          <div className="flex flex-col lg:flex-1 w-full lg:w-1/3">
             <label htmlFor="total" className="text-sm font-medium">
               Total (€)
             </label>
