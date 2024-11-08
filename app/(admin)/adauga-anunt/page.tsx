@@ -56,8 +56,8 @@ export default function CreateUtilaj() {
           />
         </div>
 
-        <div className="flex flex-row justify-between">
-          <div className="flex flex-col">
+        <div className="flex flex-row flex-wrap lg:justify-between gap-2">
+          <div className="flex flex-col flex-1 w-full lg:w-1/3">
             <label htmlFor="price" className="text-sm font-medium">
               Pret (€)
             </label>
@@ -65,11 +65,11 @@ export default function CreateUtilaj() {
               type="number"
               name="price"
               id="price"
-              className="p-1 rounded-lg border border-gray-400"
+              className="p-1 rounded-lg border border-gray-400 w-full"
               onChange={(e) => setPrice(Number(e.target.value))}
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col flex-1 w-full lg:w-1/3">
             <label htmlFor="tva" className="text-sm font-medium">
               TVA (19%) (€)
             </label>
@@ -81,7 +81,7 @@ export default function CreateUtilaj() {
               value={price * TVA ?? 0}
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col flex-1 w-full lg:w-1/3">
             <label htmlFor="total" className="text-sm font-medium">
               Total (€)
             </label>
@@ -140,7 +140,7 @@ export default function CreateUtilaj() {
 
         <button
           type="submit"
-          className="text-primary bg-gray-600 p-2 rounded-md md:w-1/5"
+          className="text-primary bg-gray-600 p-2 rounded-md md:w-2/5 mx-auto"
           aria-disabled={pending}
         >
           {pending ? <CircularProgress /> : "Adauga anunt"}
