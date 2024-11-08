@@ -17,6 +17,7 @@ model Post {
   listingType ListingType @default(FOR_SALE)
   createdAt   DateTime    @default(now()) @map("created_at")
   updatedAt   DateTime    @updatedAt @map("updated_at")
+  deletedAt   DateTime?   @map("deleted_at")
   images      Image[]
   authorId    String?
   author      User?       @relation(fields: [authorId], references: [id])
