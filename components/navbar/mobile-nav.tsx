@@ -37,22 +37,24 @@ export default function MobileNav() {
         }`}
       />
 
-      <div
-        className={`${
-          isMobileMenuOpen ? "block opacity-100" : "opacity-0"
-        } lg:opacity-0 z-10 absolute top-14 right-0 transition-opacity ease-in-out delay-150 duration-300`}
-      >
-        <ul className="flex flex-col items-center border divide-y divide-white">
-          {NavbarItems.map((item, index) => (
-            <li
-              key={index}
-              className="py-3 w-full px-6 bg-black hover:bg-gray-600"
-            >
-              <NavLink href={item.href} name={item.name} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      {isMobileMenuOpen ? (
+        <div
+          className={`${
+            isMobileMenuOpen ? "block opacity-100" : "opacity-0"
+          } lg:opacity-0 z-20 absolute top-14 right-0 transition-opacity ease-in-out delay-150 duration-300`}
+        >
+          <ul className="flex flex-col items-center border divide-y divide-white">
+            {NavbarItems.map((item, index) => (
+              <li
+                key={index}
+                className="py-3 w-full px-6 bg-black hover:bg-gray-600"
+              >
+                <NavLink href={item.href} name={item.name} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 }
