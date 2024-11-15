@@ -1,32 +1,67 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
+import { Paper } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
-import { Paper } from "@mui/material";
 
-export default function Home() {
+import { getLastPostByListingType } from "./actions/posts";
+import formatPrice from "utils/format-price";
+import styles from "./style.module.css";
+
+export default async function Home() {
+  const lastForRent = await getLastPostByListingType("FOR_RENT");
+  const lastForSale = await getLastPostByListingType("FOR_SALE");
+
   return (
     <div className="flex flex-col items-center px-2 md:px-10">
       <h1 className="text-xl md:text-2xl lg:text-3xl my-4 md:my-8 text-center px-2">
         Platforma de{" "}
         <span className="py-1 px-4 rounded-lg font-bold bg-gradient-to-r from-amber-200 to-yellow-500">
-          vanzare utilaje
+          vanzare/inchiriere utilaje
         </span>{" "}
         in Bistrita
         <LocationOnIcon className="inline text-yellow-500 text-xl md:text-2xl lg:text-3xl" />
       </h1>
 
-      <div className="w-full flex flex-wrap justify-around">
-        <Paper className="w-full md:w-2/5 flex flex-col items-center px-4 py-4 space-y-4 mb-4">
+      <div className="w-full flex flex-wrap justify-around items-center md:gap-y-10">
+        {lastForSale !== null && (
+          <div className="flex flex-col items-center w-full md:w-[30%]">
+            <Link href={`/utilaje/${lastForSale.id}`}>
+              <h2 className="text-lg lg:text-xl text-center">
+                Ultimul anunt de{" "}
+                <span className="text-listing-sale font-bold">vanzare</span>
+              </h2>
+              <div className="relative rounded-lg">
+                <div className={`${styles.ribbon} bg-listing-sale`}>NOU!</div>
+                <div className="flex flex-col items-center">
+                  <img
+                    alt="gallery"
+                    className="block h-full w-full rounded-lg object-cover object-center"
+                    src={lastForSale?.images[0]?.url ?? "/no-image.jpg"}
+                  />
+                  <h3 className="text-xl font-bold text-gray-800">
+                    {lastForSale?.title}
+                  </h3>
+                  <p className="text-listing-sale text-xl">
+                    {formatPrice(lastForSale?.price ?? 0)}&euro;
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </div>
+        )}
+
+        <Paper className="w-full md:w-[50%] flex flex-col items-center p-4 md:p-8 space-y-4 bg-white bg-opacity-5">
           <h2 className="text-lg lg:text-xl text-center">
-            Vinde și cumpără utilaje rapid și ușor!
+            Cumpara, inchiriaza sau vinde utilaje rapid și ușor!
           </h2>
           <p className="text-center text-sm md:text-base">
             Te ajutăm să găsești utilajele de care ai nevoie sau să vinzi ceea
             ce nu mai folosești.
           </p>
-          <p className="text-center text-base">
+          <hr />
+          <p className="text-center text-base leading-8">
             <Link
               className="text-white font-bold rounded-full bg-black px-2 md:px-4 py-2 md:py-3 hover:bg-gray-800"
               href="/utilaje"
@@ -37,7 +72,7 @@ export default function Home() {
           </p>
         </Paper>
 
-        <Paper className="w-full md:w-2/5 flex flex-col items-center px-4 py-4 space-y-4 mb-4">
+        <Paper className="w-full md:w-[50%] flex flex-col items-center p-4 md:p-8 space-y-4 bg-white bg-opacity-5">
           <h2 className="text-lg lg:text-xl text-center">
             Transformă echipamentul nefolosit în bani!
           </h2>
@@ -45,7 +80,8 @@ export default function Home() {
             Publică-ți anunțul pe platforma noastră și găsește cumpărători
             locali.
           </p>
-          <p className="text-center text-base">
+          <hr />
+          <p className="text-center text-base leading-8">
             <Link
               className="text-white font-bold rounded-full bg-black px-2 md:px-4 py-2 md:py-3 hover:bg-gray-800"
               href="/contact"
@@ -55,57 +91,31 @@ export default function Home() {
             administratorul pentru detalii.
           </p>
         </Paper>
-      </div>
 
-      <div className="container mx-auto bg-diagonal-stripes rounded-2xl px-3 py-3 my-2 lg:px-10 lg:py-10 lg:my-10">
-        <div className="-m-1 flex flex-wrap md:-m-2">
-          <div className="flex w-full md:w-1/2 flex-wrap">
-            <div className="w-1/2 p-1 md:p-2">
-              <img
-                alt="gallery"
-                className="block h-full w-full rounded-lg object-cover object-center"
-                src="/presentation/5.jpg"
-              />
-            </div>
-            <div className="w-1/2 p-1 md:p-2">
-              <img
-                alt="gallery"
-                className="block h-full w-full rounded-lg object-cover object-center"
-                src="/presentation/2.jpg"
-              />
-            </div>
-            <div className="w-full p-1 md:p-2">
-              <img
-                alt="gallery"
-                className="block h-full w-full rounded-lg object-cover object-center"
-                src="/presentation/4.jpg"
-              />
+        {lastForRent !== null && (
+          <div className="flex flex-col items-center w-full md:w-[30%]">
+            <h2 className="text-lg lg:text-xl text-center">
+              Ultimul anunt de{" "}
+              <span className="text-listing-rent font-bold">inchiriere</span>
+            </h2>
+            <div className="relative">
+              <div className={`${styles.ribbon} bg-listing-rent`}>NOU!</div>
+              <div className="flex flex-col items-center">
+                <img
+                  alt="gallery"
+                  className="block h-full w-full rounded-lg object-cover object-center"
+                  src={lastForRent?.images[0]?.url ?? "/no-image.jpg"}
+                />
+                <h3 className="text-xl font-bold text-gray-800">
+                  {lastForRent?.title}
+                </h3>
+                <p className="text-listing-rent text-xl">
+                  {formatPrice(lastForRent?.price ?? 0)}&euro;
+                </p>
+              </div>
             </div>
           </div>
-          <div className="flex w-full md:w-1/2 flex-wrap">
-            <div className="w-full p-1 md:p-2">
-              <img
-                alt="gallery"
-                className="block h-full w-full rounded-lg object-cover object-center"
-                src="/presentation/1.jpg"
-              />
-            </div>
-            <div className="w-1/2 p-1 md:p-2">
-              <img
-                alt="gallery"
-                className="block h-full w-full rounded-lg object-cover object-center"
-                src="/presentation/3.jpg"
-              />
-            </div>
-            <div className="w-1/2 p-1 md:p-2">
-              <img
-                alt="gallery"
-                className="block h-full w-full rounded-lg object-cover object-center"
-                src="/presentation/6.jpg"
-              />
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -22,6 +22,11 @@ module.exports = {
           dark: "#D2691E", // A more dark yellow-orange shade
           pale: "#FFDAB9", // A pale yellow-orange shade
         },
+        listing: {
+          rent: "#0398fc",
+          sale: "#039903",
+          sold: "#b50404",
+        },
       },
       backgroundImage: {
         "diagonal-stripes":

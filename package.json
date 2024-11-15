@@ -26,6 +26,7 @@
     "formik": "^2.4.5",
     "googleapis": "^134.0.0",
     "js-marker-clusterer": "github:googlemaps/markerclusterer",
+    "motion": "^11.11.17",
     "next": "^14.0.4",
     "next-auth": "^4.24.7",
     "nodemailer": "^6.9.12",

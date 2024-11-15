@@ -6,9 +6,8 @@ import { Paper } from "@mui/material";
 import formatPrice from "utils/format-price";
 import { isUserAdmin } from "@/app/actions/user";
 import { getPosts } from "@/app/actions/posts";
-
-import styles from "./style.module.css";
 import { TVA } from "types/constants/price";
+import styles from "./style.module.css";
 
 export const metadata: Metadata = {
   title: "Utilaje de vanzare",
@@ -42,10 +41,10 @@ export default async function Utilaje() {
               <div
                 className={`${styles.ribbon} ${
                   post.sold === true
-                    ? "bg-red-500"
+                    ? "bg-listing-sold"
                     : post.listingType === "FOR_SALE"
-                    ? "bg-green-500"
-                    : "bg-blue-500"
+                    ? "bg-listing-sale"
+                    : "bg-listing-rent"
                 } rounded-l-lg`}
               >
                 {post.sold === true
@@ -72,7 +71,7 @@ export default async function Utilaje() {
                     {post.title}
                   </h3>
 
-                  <p className="text-green-600 text-2xl">
+                  <p className="text-listing-sale text-2xl">
                     {formatPrice(post.price)}&euro;
                   </p>
                   <p

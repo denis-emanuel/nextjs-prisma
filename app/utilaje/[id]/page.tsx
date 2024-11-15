@@ -1,13 +1,13 @@
-import { ImagesCarousel } from "@/components/carousel/index";
-import prisma from "@/lib/prisma";
-
-import { DeleteButton, MarkSoldButton } from "./post-buttons";
-import { Paper } from "@mui/material";
 import { ResolvingMetadata } from "next";
+import { Paper } from "@mui/material";
+
 import { isUserAdmin } from "@/app/actions/user";
-import formatPrice from "utils/format-price";
 import { getData } from "./actions";
+import formatPrice from "utils/format-price";
 import { TVA } from "types/constants/price";
+
+import { ImagesCarousel } from "@/components/carousel/index";
+import { DeleteButton, MarkSoldButton } from "./post-buttons";
 
 type UtilajProps = {
   params: { id: string };
