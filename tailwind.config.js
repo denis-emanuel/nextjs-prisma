@@ -30,7 +30,7 @@ module.exports = {
       },
       backgroundImage: {
         "diagonal-stripes":
-          "repeating-linear-gradient(45deg, rgba(255, 255, 0, 0.8), rgba(181, 181, 20, 0.8) 20px, rgba(0, 0, 0, 0.8) 20px, rgba(0, 0, 0, 0.8) 40px)",
+          "repeating-linear-gradient(45deg, rgba(255, 255, 0, 0.2), rgba(181, 181, 20, 0.2) 100px, rgba(0, 0, 0, 0.2) 100px, rgba(0, 0, 0, 0.2) 200px)",
       },
     },
   },
